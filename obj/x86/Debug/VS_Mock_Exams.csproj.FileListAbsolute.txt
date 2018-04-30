@@ -1,0 +1,7 @@
+D:\GitHub\VS_Mock_Exams\bin\Debug\VS_Mock_Exams.exe
+D:\GitHub\VS_Mock_Exams\bin\Debug\VS_Mock_Exams.pdb
+D:\GitHub\VS_Mock_Exams\obj\x86\Debug\VS_Mock_Exams.main.resources
+D:\GitHub\VS_Mock_Exams\obj\x86\Debug\VS_Mock_Exams.Properties.Resources.resources
+D:\GitHub\VS_Mock_Exams\obj\x86\Debug\VS_Mock_Exams.csproj.GenerateResource.Cache
+D:\GitHub\VS_Mock_Exams\obj\x86\Debug\VS_Mock_Exams.exe
+D:\GitHub\VS_Mock_Exams\obj\x86\Debug\VS_Mock_Exams.pdb
