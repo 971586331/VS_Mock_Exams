@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.StubHelpers;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 //当前状态
 public enum e_Current_cmd
@@ -58,5 +60,5 @@ public static class common // static 不是必须
     public static e_Current_cmd gCurrent_cmd;
     public static Input_Info gInput_Info;
     public static e_Conversion_cmd gConversion_cmd;
-
+    public static MySqlConnection sqlcom = null;
 }

@@ -5,14 +5,13 @@ using System.Data;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
-public class common_mysql // static 不是必须
+public class common_mysql
 {
-
     //连接数据库
     //返回值：0x00>连接正常 -1>连接失败
     public static int Connect_Databse(ref MySqlConnection con, string ip, string port, string user, string password)
     {
-        string connect_str = "Server=" + ip + ";port=" + port + ";User ID=" + user + ";Password=" + password + ";CharSet=utf8;";
+        string connect_str = "Server=" + ip + ";port=" + port + ";User ID=" + user + ";Password=" + password + ";";
 
         try
         {
@@ -134,12 +133,6 @@ public class common_mysql // static 不是必须
         }
     }
 
-    //查询表中有多少条数据
-    public static int Query_Table_Row(MySqlConnection com, string database, string table)
-    {
-        return - 1;
-    }
-
     //创建库
     //返回值：0x00>创建成功  -1>数据库创建错误
     public static int Create_Databse(MySqlConnection com, string database)
@@ -246,6 +239,57 @@ public class common_mysql // static 不是必须
         catch (Exception ex)
         {
             Console.WriteLine("更改数据库编码:{0}!", ex.ToString());
+            return -1;
+        }
+    }
+
+    //查询表中有多少条数据
+    public static int Query_Table_Row(MySqlConnection com, string table)
+    {
+        string query_str = "SELECT COUNT(*) FROM " + table;
+
+        try
+        {
+            MySqlCommand myCmd = new MySqlCommand(query_str, com);
+            int count = (int)myCmd.ExecuteScalar();     //常被用于执行聚合函数
+            return count;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("查询表中有多少条数据出错:{0}!", ex.ToString());
+            return -1;
+        }
+    }
+
+    public static int Query_One_Record(MySqlConnection com, string table, int num, ref Test_Questions data)
+    {
+        string query_str = "select ID, Subject, A, B, C, Answer from " + table + " where ID = " + num.ToString();
+
+        try
+        {
+            MySqlCommand myCmd = new MySqlCommand(query_str, com);
+            MySqlDataReader reader = myCmd.ExecuteReader();
+            if (reader.Read() == true)
+            {
+                data.Title_Number = reader.GetInt32(0);
+                data.Subject = reader.GetString(1);
+                data.Option_A = reader.GetString(2);
+                data.Option_B = reader.GetString(3);
+                data.Option_C = reader.GetString(4);
+                data.Answer = reader.GetString(5);
+            }
+            else
+            {
+                Console.WriteLine("没有查询到些ID的数据:{0}!", num);
+                return -1;
+            }
+            reader.Close();
+            //Console.WriteLine("表不存在");
+            return 0x00;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("查询库中的表错误:{0}!", ex.ToString());
             return -1;
         }
     }
